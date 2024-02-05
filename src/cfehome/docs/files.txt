@@ -1,0 +1,4 @@
+celery -A cfehome worker -l info -P gevent
+
+celery -A cfehome beat -l info
+

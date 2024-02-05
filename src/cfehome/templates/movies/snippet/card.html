@@ -1,0 +1,40 @@
+<div class="single-portfolio">
+    <div class="single-portfolio-img">
+        
+        <a href="{{ object.get_absolute_url }}" class="popup">
+            <img src="https://image.tmdb.org/t/p/original/{{ object.poster_path }}" alt="portfolio" />
+        </a>
+    </div>
+    <div class="portfolio-content">
+        <h2>{{ object.title }} <small>({{ object.release_date.year }})</small></h2>
+        <p>{{ object.id }}</p>
+        <small>{{ my_ratings|get_dict_val:object.id }}</small>
+        <div class="review">
+            <div class="author-review">
+                <i class="icofont icofont-star"></i>
+                <i class="icofont icofont-star"></i>
+                <i class="icofont icofont-star"></i>
+                <i class="icofont icofont-star"></i>
+                <i class="icofont icofont-star"></i>
+            </div>
+            <br>
+        </div>
+        <br>
+        {% with my_ratings|get_dict_val:object.id as current_ratings %}
+            <div>
+                {% include 'ratings/snippet/rating-choices.html' with object_id=object.id current_rating=current_rating %}
+            </div>
+        {% endwith %}
+        <br>
+        <br>
+        {% if object.rating_avg %}
+        <h6>average rating: {{object.rating_avg }}</h6>
+        <br>
+        <h6>ratings: {{ object.rating_count }}</h6>
+        {% endif %}
+        <br>
+        {% if skip is True %}
+            <button hx-post="/rate/movie/" class="btn btn-primary col-md">Skip</button>
+        {% endif %}
+    </div>
+</div>
