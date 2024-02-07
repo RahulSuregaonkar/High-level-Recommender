@@ -4,8 +4,8 @@ from django.contrib import admin
 from .models import Movie 
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['__str__','calculate_ratings_count','rating_last_updated','rating_avg']
-    readonly_fields = ['rating_avg_display','rating_avg','rating_count']
+    list_display = ['__str__','idx','calculate_ratings_count','rating_last_updated','rating_avg']
+    readonly_fields = ['idx']
     search_fields = ['id']
 
 

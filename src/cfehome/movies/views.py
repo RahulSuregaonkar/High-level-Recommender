@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.db.models import Q
 from django.views import generic
 # Create your views here.
 from .models import Movie
@@ -87,8 +89,13 @@ class MovieInfiniteRatingView(MovieDetailedView):
 movie_infinite_rating_view = MovieInfiniteRatingView.as_view()
 
 
-
 class MoviePopularView(MovieDetailedView):
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['endless_path'] = '/movies/popular/'
+        return context
+    
     def get_object(self):
         user = self.request.user
         exclude_ids = []
@@ -96,11 +103,23 @@ class MoviePopularView(MovieDetailedView):
             exclude_ids = [x.object_id for x in user.rating_set.filter(active=True)]
         movie_id_options = Movie.objects.all().popular().exclude(id__in=exclude_ids).values_list('id', flat=True)[:250]
         return Movie.objects.filter(id__in=movie_id_options).order_by("?").first()
-
+    
     def get_template_names(self):
         request = self.request
         if request.htmx:
             return ['movies/snippet/infinite.html']
         return ['movies/infinite-view.html']
 
+
 movie_popular_view = MoviePopularView.as_view()
+
+class MovieSearchView(TemplateView):
+    template_name = 'movies/snippet/results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        if query:
+            results = Movie.objects.filter(Q(title__icontains=query) | Q(overview__icontains=query))[:5]
+            context['results'] = results
+        return context

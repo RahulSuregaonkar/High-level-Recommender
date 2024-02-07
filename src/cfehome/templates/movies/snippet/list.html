@@ -13,12 +13,40 @@
             <p>{{ object.id }}</p>
             <small>{{ my_ratings|get_dict_val:object.id }}</small>
             <div class="review">
-                <div class="author-review">
-                    <i class="icofont icofont-star"></i>
-                    <i class="icofont icofont-star"></i>
-                    <i class="icofont icofont-star"></i>
-                    <i class="icofont icofont-star"></i>
-                    <i class="icofont icofont-star"></i>
+                <div class="author-review" id="starRating">
+                    {% if object.rating_avg >= 1 %}
+                        <i class="icofont icofont-star filled"></i>
+                    {% else %}
+                        <i class="icofont icofont-star-o"></i>
+                    {% endif %}
+                    {% if object.rating_avg >= 2 %}
+                        <i class="icofont icofont-star filled"></i>
+                    {% elif object.rating_avg > 1 %}
+                        <i class="icofont icofont-star-half"></i>
+                    {% else %}
+                        <i class="icofont icofont-star-o"></i>
+                    {% endif %}
+                    {% if object.rating_avg >= 3 %}
+                        <i class="icofont icofont-star filled"></i>
+                    {% elif object.rating_avg > 2 %}
+                        <i class="icofont icofont-star-half"></i>
+                    {% else %}
+                        <i class="icofont icofont-star-o"></i>
+                    {% endif %}
+                    {% if object.rating_avg >= 4 %}
+                        <i class="icofont icofont-star filled"></i>
+                    {% elif object.rating_avg > 3 %}
+                        <i class="icofont icofont-star-half"></i>
+                    {% else %}
+                        <i class="icofont icofont-star-o"></i>
+                    {% endif %}
+                    {% if object.rating_avg >= 5 %}
+                        <i class="icofont icofont-star filled"></i>
+                    {% elif object.rating_avg > 4 %}
+                        <i class="icofont icofont-star-half"></i>
+                    {% else %}
+                        <i class="icofont icofont-star-o"></i>
+                    {% endif %}
                 </div>
                 <br>
             </div>
@@ -39,3 +67,29 @@
     </div>
 </div>
 {% endfor %}
+
+<script>
+    // Assuming object.rating_avg holds the rating average value
+    var ratingAvg = object.rating_avg; // Replace object.rating_avg with the actual value
+
+    // Round the rating average to the nearest half star
+    var roundedRating = Math.round(ratingAvg * 2) / 2;
+
+    // Generate star icons based on the rounded rating average
+    var starHtml = '';
+    for (var i = 1; i <= 5; i++) {
+        if (i <= roundedRating) {
+            // Full star
+            starHtml += '<i class="icofont icofont-star"></i>';
+        } else if (i - 0.5 === roundedRating) {
+            // Half star
+            starHtml += '<i class="icofont icofont-star-half"></i>';
+        } else {
+            // Empty star
+            starHtml += '<i class="icofont icofont-star-o"></i>';
+        }
+    }
+
+    // Insert the generated star icons into the div
+    document.getElementById('starRating').innerHTML = starHtml;
+</script>
