@@ -1,6 +1,8 @@
 ## Movie Recommendation System
 
 This project is a movie recommendation system built using collaborative filtering techniques implemented with Keras and TensorFlow. Collaborative filtering is a method commonly used for recommender systems that generates predictions about the interests of a user by collecting preferences from many users. In this system, we use the preferences of multiple users to recommend movies to a target user based on similarities in movie preferences among users.
+This Project Uses Django-Celery for countinuos Training of Machine Learning models based on user reaction for movies and gives recommendation instantaneously for every 5 ratings for the user 
+Represents a cutting-edge approach to movie recommendation, leveraging Django-Celery to deliver personalized suggestions in real-time, keeping pace with users' evolving tastes and preferences.
 
 ## Vist Website
 https://rahulrecommender.in.net/
