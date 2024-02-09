@@ -5,6 +5,9 @@ This project is a movie recommendation system built using collaborative filterin
 ## Vist Website
 https://rahulrecommender.in.net/
 
+## Colab Link
+https://colab.research.google.com/drive/1o5-5Ehkr8tM36cSeYpVEOaDj5whrxTCu
+
 ### Technologies Used
 - Django
 - Celery
