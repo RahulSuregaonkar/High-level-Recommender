@@ -20,6 +20,11 @@ https://colab.research.google.com/drive/1o5-5Ehkr8tM36cSeYpVEOaDj5whrxTCu
 - BootStrap
 - JavaScript
 
+## Data Set
+https://www.kaggle.com/datasets/omkarborikar/top-10000-popular-movies
+https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=ratings.csv
+https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=links.csv
+https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset?select=movies_metadata.csv
 
 
 ### Features
